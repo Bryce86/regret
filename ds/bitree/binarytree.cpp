@@ -196,6 +196,19 @@ void PostOrderTraverseUnrec(BiTree T)
 /* transform lchild and rchild */
 BiTree TransformLRChild(BiTree &T)
 {
+	/* PreOrder: 
+	 
+		    A
+		     \
+		      B
+		     / \
+	            D   C
+		   / \
+		  F   E
+		     /
+		    G
+	 */	
+	
 	if (!T)
 		return NULL;
 
