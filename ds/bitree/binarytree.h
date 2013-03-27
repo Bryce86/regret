@@ -22,7 +22,7 @@ void PostOrderTraverse(BiTree T);
 void LevelOrderTraverse(BiTree T);
 
 /* unrecursion traverse */
-void PreOrdeerTraverseUnrec(BiTree T);
+void PreOrderTraverseUnrec(BiTree T);
 void InOrderTraverseUnrec(BiTree T);
 void PostOrderTraverseUnrec(BiTree T);
 
