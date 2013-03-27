@@ -110,7 +110,7 @@ void LevelOrderTraverse(BiTree T)
 }
 
 /* unrecursion traverse */
-void PreOrdeerTraverseUnrec(BiTree T)
+void PreOrderTraverseUnrec(BiTree T)
 {
 	// use stack
 	const int N = 50;
