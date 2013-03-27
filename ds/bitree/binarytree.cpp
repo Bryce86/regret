@@ -10,11 +10,11 @@ void CreateBiTree(BiTree &T)
 {
 	/* PreOrder: A B C # # D E # G # # F # # #
 	 
-		   	A
+		    A
 		   / 
 		  B  
 		 / \
-	    C   D
+	        C   D
 		   / \
 		  E   F
 		   \
