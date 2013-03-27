@@ -254,6 +254,35 @@ int GetBiTreeNodes(BiTree T)
 	return GetBiTreeNodes(T->lchild) + GetBiTreeNodes(T->rchild) + 1; // has a root
 }
 
+/* nodes of level k */
+int GetBiTreeNodesOfLevelK(BiTree T, int k)
+{
+	if (!T || k < 1)
+		return 0;
+
+	if (k == 1)
+		return 1;
+
+	int left = GetBiTreeNodesOfLevelK(T->lchild, k-1); // nodes of level k-1 's l-subtree
+	int right = GetBiTreeNodesOfLevelK(T->rchild, k-1); // nodes of level k-1 's r-subtree
+
+	return (left + right);
+}
+
+/* compare BiTree structure, not care data */
+bool CmpBiTreeStructure(BiTree &T1, BiTree &T2)
+{
+	if (!T1 && !T2)
+		return true;
+	else if (!T1 || !T2)
+		return false;
+
+	bool left = CmpBiTreeStructure(T1->lchild, T2->lchild);
+	bool right = CmpBiTreeStructure(T1->rchild, T2->rchild);
+
+	return (left && right);
+}
+
 int main(void)
 {
 	BiTree T;
@@ -305,6 +334,15 @@ int main(void)
 	cout << "GetBiTreeNodes: ";
 	int nodes = GetBiTreeNodes(T);
 	cout << nodes << endl;
+
+	cout << "GetBiTreeNodesOfLevelK: ";
+	nodes = GetBiTreeNodesOfLevelK(T, 4);
+	cout << nodes << endl;
+
+	cout << "CmpBiTreeStructure: ";
+	BiTree T2 = T;
+	bool same = CmpBiTreeStructure(T, T2);
+	cout << same << endl;
 
 	return 0;
 }

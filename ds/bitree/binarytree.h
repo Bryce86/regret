@@ -45,4 +45,10 @@ int GetBiTreeLeaves(BiTree T);
 /* nodes */
 int GetBiTreeNodes(BiTree T);
 
+/* nodes of level k */
+int GetBiTreeNodesOfLevelK(BiTree T, int k);
+
+/* compare BiTree structure, not care data */
+bool CmpBiTreeStructure(BiTree &T1, BiTree &T2);
+
 #endif /* _BINARY_TREE_H_ */
