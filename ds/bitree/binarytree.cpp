@@ -193,6 +193,54 @@ void PostOrderTraverseUnrec(BiTree T)
 	} // while
 }
 
+/* transform lchild and rchild */
+BiTree TransformLRChild(BiTree &T)
+{
+	if (!T)
+		return NULL;
+
+	BiTree left = TransformLRChild(T->lchild);
+	BiTree right = TransformLRChild(T->rchild);
+
+	T->lchild = right;
+	T->rchild = left;
+
+	return T;
+}
+
+/* depth */
+int GetBiTreeDepth(BiTree T)
+{
+	if (!T)
+		return 0;
+
+	int depthLeft = GetBiTreeDepth(T->lchild); 
+	int depthRight = GetBiTreeDepth(T->rchild);
+	return depthLeft > depthRight ? (depthLeft + 1) : (depthRight + 1); // has a root
+}
+
+/* leaves */
+int GetBiTreeLeaves(BiTree T)
+{
+	if (!T)
+		return 0;
+	if (!T->lchild && !T->rchild)
+		return 1;
+
+	int leafLeft = GetBiTreeLeaves(T->lchild);
+	int leafRight = GetBiTreeLeaves(T->rchild);
+
+	return (leafLeft + leafRight);
+}
+
+/* nodes */
+int GetBiTreeNodes(BiTree T)
+{
+	if (!T)
+		return 0;
+	return GetBiTreeNodes(T->lchild) + GetBiTreeNodes(T->rchild) + 1; // has a root
+}
+
 int main(void)
 {
 	BiTree T;
@@ -216,8 +264,8 @@ int main(void)
 	LevelOrderTraverse(T);
 	cout << endl;
 
-	cout << "PreOrdeerTraverseUnrec: ";
-	PreOrdeerTraverseUnrec(T);
+	cout << "PreOrderTraverseUnrec: ";
+	PreOrderTraverseUnrec(T);
 	cout << endl;
 
 	cout << "InOrderTraverseUnrec: ";
@@ -228,6 +276,23 @@ int main(void)
 	PostOrderTraverseUnrec(T);
 	cout << endl;
 	
+	cout << "TransformLRChild(PreOT): ";
+	TransformLRChild(T);
+	PreOrderTraverse(T);
+	cout << endl;
+
+	cout << "GetBiTreeDepth: ";
+	int depth = GetBiTreeDepth(T);
+	cout << depth << endl;
+
+	cout << "GetBiTreeLeaves: ";
+	int leaves = GetBiTreeLeaves(T);
+	cout << leaves << endl;
+
+	cout << "GetBiTreeNodes: ";
+	int nodes = GetBiTreeNodes(T);
+	cout << nodes << endl;
+
 	return 0;
 }
 

@@ -33,10 +33,16 @@ void InOrderTraverseThread(BiTree T);
 void PostOrderTraverseThread(BiTree T);
 */
 
-/* transfer lchild and rchild */
+/* transform lchild and rchild */
+BiTree TransformLRChild(BiTree &T);
 
-/* Depth */
+/* depth */
+int GetBiTreeDepth(BiTree T);
 
-/* leaf */
+/* leaves */
+int GetBiTreeLeaves(BiTree T);
+
+/* nodes */
+int GetBiTreeNodes(BiTree T);
 
 #endif /* _BINARY_TREE_H_ */
