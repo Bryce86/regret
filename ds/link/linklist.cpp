@@ -226,7 +226,7 @@ bool LinkListIsInterSection(LinkList &p1, LinkList &p2)
 }
 
 /* the first intersection node of two lists */
-LinkList & GetFirstIntersectionNode(LinkList &p1, LinkList &p2)
+LinkList & GetFirstInterSectionNode(LinkList &p1, LinkList &p2)
 {
 	if (p1 == NULL || p2 == NULL)
 		return NULL;
@@ -275,6 +275,100 @@ LinkList & GetFirstIntersectionNode(LinkList &p1, LinkList &p2)
 	return pNode1;
 }
 
+/* there is a linklist that has a circle, get the first node into the circle */
+LinkList & GetFirstNodeIntoCircle(LinkList &l)
+{
+	if (l == NULL || l->next == NULL)
+		return NULL;
+
+	LinkList fast = l;
+	LinkList slow = l;
+	while (fast != NULL && fast->next != NULL)
+	{
+		fast = fast->next->next;
+		slow = slow->next;
+		if (fast == slow)
+			break;
+	}
+
+	if (fast == NULL || fast->next == NULL)
+		return NULL;
+
+	LinkList pAssumedTail = slow;
+	LinkList p1 = l;
+	LinkList p2 = pAssumedTail->next;
+
+	LinkList pNode1 = p1;
+	ine len1 = 1;
+	while (pNode1 != pAssumedTail)
+	{
+		pNode1 = pNode1->next;	
+		len1++;
+	}
+
+	LinkList pNode2 = p2;
+	int len2 = 1;
+	while (pNode2 != pAssumedTail)
+	{
+		pNode2 = pNode2->next;	
+		len2++;
+	}
+
+	pNode1 = p1;
+	pNode2 = p2;
+
+	if (len1 > len2)
+	{
+		int k = len1 - len2;	
+		while (k--)
+			pNode1 = pNode1->next;
+	}
+	else
+	{
+		int k = len2 - len1;	
+		while (k--)
+			pNode2 = pNode2->next;
+	}
+
+	while (pNode1 != pNode2)
+	{
+		pNode1 = pNode1->next;	
+		pNode2 = pNode2->next;
+	}
+
+	return pNode1;
+}
+
+/* delete one node, need O(1) */
+void deleteOneNode(LinkList &l, LinkList &pToBeDeleted)
+{
+	if (pToBeDeleted == NULL)
+		return;
+
+	if (pToBeDeleted->next != NULL)
+	{
+		pToBeDeleted->data = pToBeDeleted->next->data;
+		LinkList temp = pToBeDeleted->next;
+		pToBeDeleted->next = pToBeDeleted->next->next;
+		delete temp;
+	}
+	else
+	{
+		if (l == pToBeDeleted)	
+		{
+			l = NULL;	
+			delete pToBeDeleted;
+		}
+		else
+		{
+			LinkList pNode = l;		
+			while (pNode->next != pToBeDeleted)
+				pNode = pNode->next;
+			pNode->next = NULL;
+			delete pToBeDeleted;
+		}
+	}
+}
 
 
 
