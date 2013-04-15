@@ -22,7 +22,7 @@ int GetLinkListNodes(LinkList &l)
 
 /* 将单链表反转 */
 /* 从头到尾遍历原链表，每遍历一个结点，将其摘下放在新链表的最前端。注意链表为空和只有一个结点的情况。时间复杂度为O（n）。*/
-LinkList & ReverseLinkList(LinkList &l)
+LinkList ReverseLinkList(LinkList &l)
 {
 	// 如果链表为空或只有一个结点，无需反转，直接返回原链表头指针		
 	if (l == NULL || l->next == NULL) 
@@ -49,7 +49,7 @@ LinkList & ReverseLinkList(LinkList &l)
    这样前后两个指针的距离差是k-1，之后前后两个指针一起向前走，前面的指针走到最后一个结点时，
    后面指针所指结点就是倒数第k个结点。
 */
-LinkList & ReverseGetKthNode(LinkList &l, int k)
+LinkList ReverseGetKthNode(LinkList &l, int k)
 {
 	if (k == 0 || l == NULL) // 这里k的计数是从1开始的，若k为0或链表为空返回NULL
 		return NULL;
@@ -80,7 +80,7 @@ LinkList & ReverseGetKthNode(LinkList &l, int k)
    后面的指针每次走一步，前面的指针走到最后一个结点时，后面的指针所指结点就是中间结点，即第（n/2+1）个结点。
    注意链表为空，链表结点个数为1和2的情况。时间复杂度O（n）。
 */
-LinkList & GetMiddleNode(LinkList &l)
+LinkList GetMiddleNode(LinkList &l)
 {
 	if (l == NULL || l->next == NULL) // 链表为空或只有一个结点，返回头指针
 		return l;
@@ -137,7 +137,7 @@ void ReversePrintLinkList(LinkList &l) //recursion
 /* 这个类似归并排序。尤其注意两个链表都为空，和其中一个为空时的情况。只需要O（1）的空间。
    时间复杂度为O（max(len1, len2)）。
 */
-LinkList & MergeSortedLinkList(LinkList &p1, LinkList &p2)
+LinkList MergeSortedLinkList(LinkList &p1, LinkList &p2)
 {
 	if (p1 == NULL)
 		return p2;
@@ -186,7 +186,7 @@ LinkList & MergeSortedLinkList(LinkList &p1, LinkList &p2)
 	return pMerge;
 }
 
-LinkList & MergeSortedLinkList(LinkList &p1, LinkList &p2) // recursion
+LinkList MergeSortedLinkList(LinkList &p1, LinkList &p2) // recursion
 {
 	if (p1 == NULL)	
 		return p2;
@@ -259,7 +259,7 @@ bool LinkListIsInterSection(LinkList &p1, LinkList &p2)
     此时两个链表当前节点到第一个相交节点的距离就相等了，然后一起向后遍历，知道两个节点的地址相同。
     时间复杂度，O(len1+len2)。
 */
-LinkList & GetFirstInterSectionNode(LinkList &p1, LinkList &p2)
+LinkList GetFirstInterSectionNode(LinkList &p1, LinkList &p2)
 {
 	if (p1 == NULL || p2 == NULL)
 		return NULL;
@@ -312,7 +312,7 @@ LinkList & GetFirstInterSectionNode(LinkList &p1, LinkList &p2)
 /* 首先判断是否存在环，若不存在结束。在环中的一个节点处断开（当然函数结束时不能破坏原链表），
    这样就形成了两个相交的单链表，求进入环中的第一个节点也就转换成了求两个单链表相交的第一个节点。
 */ 
-LinkList & GetFirstNodeIntoCircle(LinkList &l)
+LinkList GetFirstNodeIntoCircle(LinkList &l)
 {
 	if (l == NULL || l->next == NULL)
 		return NULL;
