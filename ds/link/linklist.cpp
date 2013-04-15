@@ -51,7 +51,7 @@ LinkList & ReverseLinkList(LinkList &l)
 */
 LinkList & ReverseGetKthNode(LinkList &l, int k)
 {
-	if (k = 0 || l == NULL) // 这里k的计数是从1开始的，若k为0或链表为空返回NULL
+	if (k == 0 || l == NULL) // 这里k的计数是从1开始的，若k为0或链表为空返回NULL
 		return NULL;
 
 	Linklist first = l;
