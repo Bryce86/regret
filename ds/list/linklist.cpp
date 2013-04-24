@@ -175,7 +175,7 @@ LinkList ReverseGetKthNode(LinkList &l, unsigned int k)
 
 	LinkList first = l;
 	LinkList second = l;
-	while (k > 1 && first != NULL) // ǰ����ָ�����ߵ�������k������
+	while (k > 1 && first != NULL) // 前面的指针先走到正向第k个结点
 	{
 		first = first->next;	
 		k--;
