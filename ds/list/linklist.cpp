@@ -10,6 +10,7 @@ LinkList buildLineList()
 {
 	srand((unsigned int)time(NULL));
 	
+	/* 头结点 */
 	LinkList head = (LinkList)malloc(sizeof(LNode));
 	LinkList curr = head;
 
@@ -95,6 +96,7 @@ void buildTwoIntersectList(LNode **L1, LNode **L2, int nodes)
 /* 遍历线性链表 */
 void TraverseLineList(LinkList &l)
 {
+	// l为第一节点，非头结点
 	LinkList p = l;
 	while (p != NULL)
 	{
@@ -107,6 +109,7 @@ void TraverseLineList(LinkList &l)
 /* 获取单链表中值为k的结点 */
 LinkList GetOneNodeFromList(LinkList &l, int k)
 {
+	// l为第一节点，非头结点	
 	if (l == NULL)	
 		return NULL;
 
@@ -125,8 +128,13 @@ LinkList GetOneNodeFromList(LinkList &l, int k)
 /* 这是最最基本的了，应该能够迅速写出正确的代码，注意检查链表是否为空。时间复杂度为O（n）。*/
 int GetListNodes(LinkList &l)
 {
-	if (l == NULL || l->next == NULL)
+	if (l == NULL)
 		return 0;
+	// 因为不是头结点，不然需要判断
+	/*
+	if (l->next == NULL)
+		return 0;
+	*/
 
 	LinkList p = l;
 	int count = 0;
@@ -146,7 +154,9 @@ int GetListNodes(LinkList &l)
 LinkList ReverseList(LinkList &l)
 {
 	// 如果链表为空或只有一个结点，无需反转，直接返回原链表头指针
-	if (l == NULL || l->next == NULL)
+	if (l == NULL)
+		return l;
+	if (l->next == NULL)
 		return l;
 	
 	LinkList p = l;
@@ -185,7 +195,7 @@ LinkList ReverseGetKthNode(LinkList &l, unsigned int k)
 	if (k > 1 || first == NULL) // 前面的指针先走到正向第k个结点
 		return NULL;
 
-	while (first->next != NULL) // 前后两个指针一起向前走，直到前面的指针指向最后一个结点 
+	while (first->next != NULL) // 前后两个指针一起向前走，直到前面的指针指向最后一个结点 ; 这么处理是为了不让第二个指针处理second=second->next。
 	{
 		first = first->next;	
 		second = second->next;
@@ -201,7 +211,10 @@ LinkList ReverseGetKthNode(LinkList &l, unsigned int k)
  */
 LinkList GetMiddleNode(LinkList &l)
 {
-	if (l == NULL || l->next == NULL)  // 链表为空或只有一个结点，返回头指针
+	if (l == NULL)  // 链表为空或只有一个结点，返回头指针
+		return l;
+	
+	if (l->next == NULL)
 		return l;
 	
 	LinkList fast = l;
@@ -334,9 +347,11 @@ LinkList MergeSortedListUnrec(LinkList &L1, LinkList &L2)
  */
 bool ListHasCircle(LinkList &l)
 {
-	if (l == NULL || l->next == NULL)
+	if (l == NULL)
 		return false;
-
+	if (l->next == NULL)
+		return false;
+		
 	LinkList fast = l; // 快指针每次前进2步
 	LinkList slow = l; // 慢指针每次前几1步
 
@@ -435,7 +450,9 @@ LinkList GetListFirstIntersectNode(LinkList &L1, LinkList &L2)
  */ 
 LinkList GetFirstNodeIntoCircle(LinkList &l)
 {
-	if (l == NULL || l->next == NULL)
+	if (l == NULL)
+		return NULL;
+	if (l->next == NULL)
 		return NULL;
 
 	LinkList fast = l;
@@ -533,6 +550,7 @@ void DeleteOneNode(LinkList &l, LinkList &pToBeDeleted)
 int main(int argc, char **argv)
 {
 	LinkList head = buildLineList();
+	// 移除头结点
 	LinkList list = head->next;
 	
 	cout << "0. Traverse List : ";
