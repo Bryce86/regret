@@ -2,10 +2,12 @@
  * some string function's implementation.
  */
 
+#include <stdio.h>
+#include <assert.h>
+
 /* strcpy */
 
-char *
-strcpy(char *to, const char *from)
+char * strcpy_android(char *to, const char *from)
 {
 	char *save = to;
 
@@ -14,8 +16,7 @@ strcpy(char *to, const char *from)
 	return (save);
 }
 
-char *
-strcpy(char *strDest, const char *strSrc)
+char * strcpy(char *strDest, const char *strSrc)
 {
 	assert((strDest != NULL) && (strSrc != NULL));
 
@@ -27,8 +28,7 @@ strcpy(char *strDest, const char *strSrc)
 }
 
 /* strlen */
-size_t
-strlen(const char *str)
+size_t strlen(const char *str)
 {
 	const char *s;	
 
@@ -38,8 +38,7 @@ strlen(const char *str)
 }
 
 /* strcat */
-char *
-strcat(char *s, const char *append) // android
+char * strcat_android(char *s, const char *append) // android
 {
 	char *save = s;
 
@@ -50,8 +49,7 @@ strcat(char *s, const char *append) // android
 	return (save);
 }
 
-char *
-strcat(char *dst, const char *src)
+char * strcat(char *dst, const char *src)
 {
 	char *cp = dst;
 
@@ -64,36 +62,79 @@ strcat(char *dst, const char *src)
 }
 
 /* strcmp */
-int 
-strcmp(const char *s1, const char *s2)
+int strcmp(const char *s1, const char *s2)
 {
 	while (*s1 == *s2++)	
 		if (*s1++ == 0)
 			return (0);
+
 	return (*(unsigned char *)s1 - *(unsigned char *)--s2);
 }
 
-/* memcmp */
-int memcpy(const void *s1, const void *s2, size_t n)
+int __cdecl strcmp_ms(const char *src, const char *dst) // Microsoft
 {
-	const unsigned char *p1 = s1;
-	const unsigned char *end1 = p1 + n;
-	const unsigned char *p2 = s2;
-	int d = 0;
-
-	for (;;)
+	int ret = 0;
+	while (!(ret = *(unsigned char *)src - *(unsigned char *)dst) && *dst)
 	{
-		if (d || p1 >= end1) break;
-		d = (int)*p1++ - (int)*p2++;
-
-		if (d || p1 >= end1) break;
-		d = (int)*p1++ - (int)*p2++;
-
-		if (d || p1 >= end1) break;
-		d = (int)*p1++ - (int)*p2++;
-
-		if (d || p1 >= end1) break;
-		d = (int)*p1++ - (int)*p2++;
+		++src;
+		++dst;
 	}
-	return d;
+	
+	if (ret < 0)
+		ret = -1;
+	else if (ret > 0)
+		ret = 1;
+
+	return ret;
+}
+
+/* memcmp */
+void * __cdecl memcpy(void *dst, const void *src, size_t n)
+{
+	void *ret = dst;
+
+	while (n--)
+		*(char *)dst++ = *(char *)src++;
+
+	return ret;
+}
+
+/* memmove */
+void * __cdecl memmove(void *dst, const void *src, size_t n)
+{
+	void *ret = dst;
+
+	// ensure every bit of src isn't overlapped before assigned to dst 
+	if (dst <= src || (char *)dst >= ((char *)src + n))
+	{
+		// Non-Overlapping Buffers
+		// copy from lower addresses to higher addresses
+		while (n--)	
+			*(char *)dst++ = *(char *)src++;
+	}
+	else
+	{
+		// Overlapping Buffers	
+		// copy from higher address to lower addresses
+		dst = (char *)dst + (n - 1);
+		src = (char *)src + (n - 1);
+
+		while (n--)
+			*(char *)dst-- = *(char *)src--;
+	}
+
+	return ret;
+}
+
+int main()
+{
+	char s1[] = "hello, memmove";
+
+	char *s2 = memmove(s1+5, s1+7, strlen("memmove"));
+
+	printf("s1--%p\n", s1);
+	printf("s2--%p\n", s2);
+	printf("memmove: %s\n", s2);
+
+	return 0;
 }
