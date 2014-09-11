@@ -35,7 +35,12 @@ func CreateTree(T **BiTNode) {
 		fmt.Println("input: abc##de#g##f###")
 		usage = false
 	}
-
+	
+	/*
+	   输入要严格按照正确的顺序才能结束.这里要用到二叉树的一个性质,
+	   就是说对于有n个节点的二叉树,就有n+1个空域,在这里即为如果你输入了n个元素,
+	   那么一定要有n+1个#才会结束迭代过程.
+	*/
 	var data ElemType
 	fmt.Scanf("%c", &data)
 
