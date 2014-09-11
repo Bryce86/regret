@@ -229,7 +229,7 @@ int GetBiTreeDepth(BiTree T)
 
 	int depthLeft = GetBiTreeDepth(T->lchild); 
 	int depthRight = GetBiTreeDepth(T->rchild);
-	return depthLeft > depthRight ? (depthLeft + 1) : (depthRight + 1); // has a root
+	return depthLeft > depthRight ? (depthLeft + 1) : (depthRight + 1); 
 }
 
 /* leaves */
@@ -251,7 +251,7 @@ int GetBiTreeNodes(BiTree T)
 {
 	if (!T)
 		return 0;
-	return GetBiTreeNodes(T->lchild) + GetBiTreeNodes(T->rchild) + 1; // has a root
+	return GetBiTreeNodes(T->lchild) + GetBiTreeNodes(T->rchild) + 1; 
 }
 
 /* nodes of level k */
