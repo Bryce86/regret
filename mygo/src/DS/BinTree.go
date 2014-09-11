@@ -51,6 +51,8 @@ func CreateTree(T **BiTNode) {
 			(*T).data = data
 			CreateTree(&((*T).lchild))
 			CreateTree(&((*T).rchild))
+		} else {
+			return
 		}
 	}
 }
