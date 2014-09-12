@@ -4,9 +4,9 @@ import (
 	"fmt"
 )
 
-type ElemType byte
+//type ElemType byte
 type BiTNode struct {
-	data           ElemType
+	data           byte
 	lchild, rchild *BiTNode
 }
 
@@ -35,13 +35,13 @@ func CreateTree(T **BiTNode) {
 		fmt.Println("input: abc##de#g##f###")
 		usage = false
 	}
-	
+
 	/*
 	   输入要严格按照正确的顺序才能结束.这里要用到二叉树的一个性质,
 	   就是说对于有n个节点的二叉树,就有n+1个空域,在这里即为如果你输入了n个元素,
 	   那么一定要有n+1个#才会结束迭代过程.
 	*/
-	var data ElemType
+	var data byte
 	fmt.Scanf("%c", &data)
 
 	if data == '#' {
@@ -328,5 +328,41 @@ func BinaryTreeCall() {
 	fmt.Print("TransformLRChild: ")
 	TT := TransformLRChild(&T)
 	PreOrderTraverse(TT)
+	fmt.Println()
+}
+
+func BiTreeCreatedCall() {
+	var TPre *BiTNode
+	fmt.Println("PreMidCreateTree ---")
+	PreMidCreateTree(&TPre, 0, 0, len(mid))
+
+	fmt.Print("PreOrderTraverse: ")
+	PreOrderTraverse(TPre)
+	fmt.Println()
+
+	fmt.Print("InOrderTraverse: ")
+	InOrderTraverse(TPre)
+	fmt.Println()
+
+	fmt.Print("PostOrderTraverse: ")
+	PostOrderTraverse(TPre)
+	fmt.Println()
+
+	/***********************************/
+
+	var TPost *BiTNode
+	fmt.Println("PostMidCreateTree ---")
+	PostMidCreateTree(&TPost, len(pst)-1, 0, len(mid))
+
+	fmt.Print("PreOrderTraverse: ")
+	PreOrderTraverse(TPost)
+	fmt.Println()
+
+	fmt.Print("InOrderTraverse: ")
+	InOrderTraverse(TPost)
+	fmt.Println()
+
+	fmt.Print("PostOrderTraverse: ")
+	PostOrderTraverse(TPost)
 	fmt.Println()
 }
