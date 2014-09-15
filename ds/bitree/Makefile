@@ -1,10 +1,16 @@
 CXX=g++
 CXXFLAGS=-g -Wall
 
-all: test
+all: test pmcb thrd
 
-test: *.cpp
+test: binarytree.cpp
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+pmcb: PreMidCreateBiTree.cpp
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+thrd: ThreadBiTree.cpp
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 clean:
-	rm -f test
+	rm -f test.* pmcb.* thrd.*
