@@ -14,3 +14,7 @@
 
 # vim swp
 *.swp
+
+# proj go, sort module generations
+sorted.dat
+unsorted.dat
