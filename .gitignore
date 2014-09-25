@@ -17,4 +17,7 @@
 
 # proj go, sort module generations
 sorted.dat
-unsorted.dat
+*.exe
+windows_*\
+windows_amd64\
+*.dat
