@@ -124,7 +124,7 @@ void heapsort(int a[], int n)
 	MakeMaxHeap(a, n);
 	//MakeMinHeap(a, n);
 	
-	for (int i = n-1; i >= 1; i--)
+	for (int i = n-1; i >= 1; i--) // because need to swap, so i equal 1, not need to equal 0
 	{
 		Swap(a[i], a[0]);	
 		MaxHeapFixdown(a, 0, i);
