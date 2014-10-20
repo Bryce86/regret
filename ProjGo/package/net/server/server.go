@@ -8,10 +8,10 @@ import (
 	"os"
 )
 
-func Server(ip, port string) {
-	fmt.Printf("Welcome to meeting room: %s, %s\n\n", ip, port)
+func Server(port string) {
+	fmt.Printf("Welcome to meeting room: %s, %s\n\n", "127.0.0.1", port)
 
-	lst, err := net.Listen("tcp", ":7788")
+	lst, err := net.Listen("tcp", ":"+port)
 	if err != nil {
 		fmt.Println("Listen failed: ", err)
 		return
@@ -55,12 +55,12 @@ func processMsg(conn net.Conn) {
 
 func main() {
 	flag.Usage = func() {
-		fmt.Printf("[Usage]\n\t\t%s ip port\n", os.Args[0])
+		fmt.Printf("[Usage]\n\t\t%s port\n", os.Args[0])
 	}
 	flag.Parse()
 
-	if flag.NArg() == 2 {
-		Server(os.Args[1], os.Args[2])
+	if flag.NArg() == 1 {
+		Server(os.Args[1])
 	} else {
 		flag.Usage()
 	}
