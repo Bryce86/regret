@@ -21,6 +21,23 @@ int main(int argc, char **argv) {
 		std::cout << "Windows socket 2.2 startup" << std::endl;
 	}
 
+	/*
+	WINBASEAPI __out HANDLE WINAPI CreateIoCompletionPort(
+		__in HANDLE FileHandle,
+		__in_opt HANDLE ExistingCompletionPort,
+		__in ULONG_PTR CompletionKey,
+		__in DWORD NumberOfConcurrentThreads
+	);
+	
+	FileHandle是关联的文件句柄。
+	ExistingCompletionPort是已经存在的完成端口。如果为NULL，则为新建一个IOCP。
+	CompletionKey是传送给处理函数的参数。
+	NumberOfConcurrentThreads是有多少个线程在访问这个消息队列。
+							 当参数ExistingCompletionPort不为0的时候，系统忽略该参数。
+							 当该参数为0表示允许同时相等数目于处理器个数的线程访问该消息队列。
+	*/
+	
+	
 	// 创建工作线程处理完成端口对象的事件
 	HANDLE hIocp = CreateIoCompletionPort(INVALID_HANDLE_VALUE, 0, 0, 0);
 	if (!hIocp) {
