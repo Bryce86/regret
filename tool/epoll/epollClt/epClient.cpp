@@ -50,6 +50,15 @@ int epollClient::sendMsg(const std::string msg) {
 }
 
 int epollClient::recvMsg() {
+	char buff[1024];
+	int nread = recv(m_fd, buff, 1024, 0);
+	if (nread < 0) {
+		std::cout << "recv failed." << std::endl;	
+		return -1;
+	}
+	buff[nread] = '\0';
+	std::cout << buff << std::endl;
+
 	return 0;
 }
 
@@ -76,7 +85,11 @@ int Singleton() {
 				return -1;
 			}
 		}
-		ec.sendMsg(buff);	
+
+		if (ec.sendMsg(buff) > 0) {
+			// if service give a response
+			ec.recvMsg();
+		}	
 	}
 }
 
@@ -89,6 +102,7 @@ void * WorkerThread(void *) {
 	ec.Connect();
 	for (int i = 0; i < LOOP_MSG_NUM; i++) {
 		ec.sendMsg("This is a test msg.");	
+		ec.recvMsg();
 		//microsecond
 		usleep(5 * 1000); // if not waiting, LOOP_MSG_NUM messages all be combined to one.
 	}
@@ -115,8 +129,8 @@ int Multiton() {
 
 int main(int argc, char **argv)
 {
-	//Singleton();
-	Multiton();
+	Singleton();
+	//Multiton();
 	return 0;
 }
 

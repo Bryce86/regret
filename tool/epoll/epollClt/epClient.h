@@ -10,7 +10,7 @@
 #include <time.h>
 #include <pthread.h>
 
-#define LOOP_MSG_NUM 10 // every thread send LOOP_MSG_NUM messages.
+#define LOOP_MSG_NUM 2000 // every thread send LOOP_MSG_NUM messages.
 #define PROCESSOR_NUM 8 // create PROCESSOR_NUM threads.
 
 class epollClient {
