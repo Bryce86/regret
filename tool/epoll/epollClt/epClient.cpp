@@ -86,7 +86,7 @@ int Singleton() {
 			}
 		}
 
-		if (ec.sendMsg(buff) > 0) {
+		if (ec.sendMsg(buff) == 0) {
 			// if service give a response
 			ec.recvMsg();
 		}	
