@@ -56,7 +56,7 @@ char * strcat(char *dst, const char *src)
 	while (*dst)
 		dst++;
 
-	while ((*dst++ = *src++) != '\n');
+	while ((*dst++ = *src++) != '\0');
 
 	return (cp);
 }
