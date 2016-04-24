@@ -73,11 +73,6 @@ void GetTop(SqStack &s, SElemType &e)
 
 void StackTraverse(SqStack &s /*Status (* visit)() */)
 {
-	/*
-	while (!StackEmpty(s))
-		cout << *--s.top;
-		*/
-
 	SElemType *p = s.base;
 
 	while (p != s.top)
@@ -89,27 +84,26 @@ void LineEdit()
 	SqStack s;
 	InitStack(s);
 
-	SElemType ch = getchar();
+	SElemType ch;
+    bool flag = true;
 
-	while (ch != EOF)
+	while (flag)
 	{
-		while (ch != EOF && ch != '\n')	
+        // getchar() encounter 'Enter' exit, but cin >> not
+		while ((ch = getchar) != EOF && ch != '\n')	
 		{
 			switch (ch) {
 				SElemType c;
 				case '#' : Pop(s, c); break;
 				case '@' : ClearStack(s); break;
+                case '$' : flag = false; break;
 				default : Push(s, ch);
 			}	
-			ch = getchar();
 		}
 		
 		// stack traverse
 		StackTraverse(s);
-
 		ClearStack(s);	
-		if (ch != EOF)
-			ch = getchar();
 	}
 	DestroyStack(s);
 }
