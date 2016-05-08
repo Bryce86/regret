@@ -15,7 +15,7 @@ void CreateBiTree(BiTree &T)
 		   / 
 		  B  
 		 / \
-	        C   D
+	    C   D
 		   / \
 		  E   F
 		   \
