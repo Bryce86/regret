@@ -1,0 +1,58 @@
+去重全排列的递归实现
+string(123)的全排列如下：
+#1: IN, k=0
+#1: LOOP : k=0, i=0
+#1: SWAP 1: 123 => 123, DOWN >>
+        #2: IN, k=1
+        #2: LOOP : k=1, i=1
+        #2: SWAP 1: 123 => 123, DOWN >>
+                #3: IN, k=2
+                #3: 第1个排列：<<< 123 >>>
+                #3: OUR OF AR ! UP <<
+        #2: SWAP 2: 123 => 123
+        #2: LOOP : k=1, i=2
+        #2: SWAP 1: 123 => 132, DOWN >>
+                #3: IN, k=2
+                #3: 第2个排列：<<< 132 >>>
+                #3: OUR OF AR ! UP <<
+        #2: SWAP 2: 132 => 123
+        #2: OUR OF AR ! UP <<
+#1: SWAP 2: 123 => 123
+#1: LOOP : k=0, i=1
+#1: SWAP 1: 123 => 213, DOWN >>
+        #2: IN, k=1
+        #2: LOOP : k=1, i=1
+        #2: SWAP 1: 213 => 213, DOWN >>
+                #3: IN, k=2
+                #3: 第3个排列：<<< 213 >>>
+                #3: OUR OF AR ! UP <<
+        #2: SWAP 2: 213 => 213
+        #2: LOOP : k=1, i=2
+        #2: SWAP 1: 213 => 231, DOWN >>
+                #3: IN, k=2
+                #3: 第4个排列：<<< 231 >>>
+                #3: OUR OF AR ! UP <<
+        #2: SWAP 2: 231 => 213
+        #2: OUR OF AR ! UP <<
+#1: SWAP 2: 213 => 123
+#1: LOOP : k=0, i=2
+#1: SWAP 1: 123 => 321, DOWN >>
+        #2: IN, k=1
+        #2: LOOP : k=1, i=1
+        #2: SWAP 1: 321 => 321, DOWN >>
+                #3: IN, k=2
+                #3: 第5个排列：<<< 321 >>>
+                #3: OUR OF AR ! UP <<
+        #2: SWAP 2: 321 => 321
+        #2: LOOP : k=1, i=2
+        #2: SWAP 1: 321 => 312, DOWN >>
+                #3: IN, k=2
+                #3: 第6个排列：<<< 312 >>>
+                #3: OUR OF AR ! UP <<
+        #2: SWAP 2: 312 => 321
+        #2: OUR OF AR ! UP <<
+#1: SWAP 2: 321 => 123
+#1: OUR OF AR ! UP <<
+
+Process returned 0 (0x0)   execution time : 0.046 s
+Press any key to continue.
