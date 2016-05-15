@@ -152,5 +152,8 @@ int main()
 			//InsertBSTNode(T, arr[i]);
 
 	InOrderTraverseBiTree(T); cout << endl;
+
+	DeleteBST(T, 51);
+	InOrderTraverseBiTree(T); cout << endl;
 	return 0;
 }
