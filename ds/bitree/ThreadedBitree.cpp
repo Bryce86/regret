@@ -12,7 +12,8 @@ typedef struct BiThrNode {
 } BiThrNode, *BiThrTree;
 
 // 先序创建二叉树
-void createBiTree(BiThrTree &T) { // NOTICE: 注意该处使用的是引用，省去二级指针的繁琐。C语言另当别论
+// NOTICE: 注意该处使用的是引用，省去二级指针的繁琐。C语言另当别论
+void createBiTree(BiThrTree &T) { 
 	// PreOrder: abdh##i##ej###cf##g## 
 	char ch;
 	cin >> ch;
@@ -33,7 +34,7 @@ void createBiTree(BiThrTree &T) { // NOTICE: 注意该处使用的是引用，�
 
 }
 
-BiThrTree pre; //全局变量，用于二叉树的线索化
+BiThrTree pre; //全局变量，始终指向刚刚访问过的结点
 
 void InThreading(BiThrTree &T) {
 	if (T) 
@@ -76,6 +77,8 @@ BiThrTree InOrderThrTree(BiThrTree T)
 
 	InThreading(T);
 
+	// 线索化后pre指向刚刚访问过的最后一个结点
+	// 然后将其与与头指针相关联
 	pre->RTag = Thread;
 	pre->rchild = Thre;
 	
@@ -92,9 +95,9 @@ void InOrderTraverse_Thr(BiThrTree &T)
 
 	while (p != T) { //指针回指向头结点时结束
 		while (p->LTag == Link)	
-			p = p->lchild;
+			p = p->lchild; // 找到左子树最左结点
 
-		cout << p->data;
+		cout << p->data << " ";
 
 		while (p->RTag == Thread && p->rchild != T) {
 			p = p->rchild;	
