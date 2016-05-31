@@ -2,13 +2,13 @@
 
 using namespace std;
 
-int binarysearch(int *arr, int len, int x)
+int binarysearch(/*specify arguments*/)
 {
 
     return -1;
 }
 
-int binarysearch_in_recursion(int *arr, int l, int r, int x)
+int binarysearch_in_recursion(/*specify arguments*/)
 {
 
     return -1;
@@ -19,10 +19,10 @@ int main()
     int array[] = {1,2,3,4,5,6,7,8,9,10};
     int len = sizeof(array)/sizeof(array[0]);
 
-    int idx = binarysearch(array, len, 5);
+    int idx = binarysearch(...);
     cout << idx << endl;
 
-    idx = binarysearch_in_recursion(array, 0, len-1, 8);
+    idx = binarysearch_in_recursion(...);
     cout << idx << endl;
 
     return 0;
