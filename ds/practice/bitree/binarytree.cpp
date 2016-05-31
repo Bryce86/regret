@@ -1,9 +1,17 @@
 #include <iostream>
-#include "binarytree.h"
 
 using std::cout;
 using std::endl;
 using std::cin;
+
+#define OVERFLOW -1
+
+typedef char TElemType;
+
+typedef struct BiTNode {
+    TElemType data;
+    struct BiTNode *lchild, *rchild;
+}BiTNode, *BiTree;
 
 /* preorder traverse to building bitree */
 void CreateBiTree(BiTree &T)
