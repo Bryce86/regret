@@ -71,10 +71,10 @@ void showArray(int *array, int len, std::string prefix)
 
 int main()
 {
-	int array[MAX_VALUES] = {0};
+    int array[MAX_VALUES] = {0};
     // generate array elements by random
 
-	int len = MAX_VALUES;
+    int len = MAX_VALUES;
     srand((unsigned)time(NULL));
     std::string prefix;
 
@@ -162,6 +162,6 @@ end:
 
     showArray(array, len, prefix);
 
-	return 0;
+    return 0;
 }
 
