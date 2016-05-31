@@ -1,103 +1,167 @@
 #include <iostream>
 #include <cstring>
+#include <cassert>
+#include <cstdlib>
+#include <cstdio>
+#include <ctime>
+
 using std::cout;
 using std::endl;
 
-void Swap(int &a, int &b)
-{
-	int temp = a;
-	a = b;
-	b = temp;
+void Swap(int &a, int &b) {
 }
 
 void BubbleSort(int *array, int len) {
-
 }
 
 void BubbleSort1(int *array, int len) {
-
 }
 
 void BubbleSort2(int *array, int len) {
-
 }
 
-void selectSort(int *array, int len) {
-
+void SelectSort(int *array, int len) {
 }
 
-void insertSort(int *array, int len) {
-
+void InsertSort(int *array, int len) {
 }
 
-void insertSort1(int *array, int len) {
-
+void InsertSort1(int *array, int len) {
 }
 
-void mergearray(int *array, int l, int mid , int r, int *temp) {
-
+void mergearray(/*specify arguments*/) {
 }
 
-void mergesort(int *array, int l, int r, int *temp) {
-
+void mergesort(/*specify arguments*/) {
 }
 
 void MergeSort(int *array, int len) {
-
 }
 
-void quicksort(int *array, int l, int r) {
-
+void quicksort(/*specify arguments*/) {
 }
 
 void QuickSort(int *array, int len) {
-
 }
 
 void ShellSort(int *array, int len) {
-
 }
 
-void MaxHeapDownAdjust(int *array, int i, int n) {
-
+void maxHeapDownAdjust(/*specify arguments*/) {
 }
 
-void MakeMaxHeap(int *array, int len) {
-
+void makeMaxHeap(/*specify arguments*/) {
 }
 
 void MaxHeapSort(int *array, int len) {
+}
 
+#define MAX_VALUES 10
+#define VALUES_RANGE 100
+
+void showArray(int *array, int len, std::string prefix)
+{
+    assert(len >= 0);
+
+    cout << prefix.c_str();
+    for (int i = 0; i < len; ++i)
+        cout << array[i] << " ";
+    cout << endl;
 }
 
 int main()
 {
-	int array[] = {51, 4, 13, -2, 100, 0, 1, -10, 1, 1, 3, 69};
-	int len = sizeof(array)/sizeof(int);
-	cout << "origin sort array: ";
-	for (int z = 0; z < len; z++)
-	{
-		cout << array[z] << " ";	
-	}
-	cout << endl;
-	cout << "sorted array:      ";
+	int array[MAX_VALUES] = {0};
+    // generate array elements by random
 
-	BubbleSort(array, len);
-	//BubbleSort1(array, len);
-	//BubbleSort2(array, len);
-	//selectSort(array, len);
-	//insertSort(array, len);
-	//insertSort1(array, len);
-	//MergeSort(array, len);
-	//QuickSort(array, len);
-	//ShellSort(array, len);	
-	//MaxHeapSort(array, len);
+	int len = MAX_VALUES;
+    srand((unsigned)time(NULL));
+    std::string prefix;
 
-	for (int i = 0; i < len; i++)
-	{
-		cout << array[i] << " ";	
-	}
-	cout << endl;
+    // display origin array
+    for (int i = 0; i < len; ++i) {
+        array[i] = rand() % VALUES_RANGE;
+    }
+    prefix = ">> Initial Array: ";
+    showArray(array, len, prefix);
+
+    // input the index of per sort algorithms
+    cout << ">> Choose sort algorithm: \n"
+         << "1. Bubble 1\n"
+         << "2. Bubble 2\n"
+         << "3. Bubble 3\n"
+         << "4. Select\n"
+         << "5. Insert 1\n"
+         << "6. Insert 2\n"
+         << "7. Shell\n"
+         << "8. Merge\n"
+         << "9. Quick\n"
+         << "0. Heap\n"
+         << ">> ";
+
+    char c = getchar();
+
+    switch (c)
+    {
+    case '1':
+	    BubbleSort(array, len);
+
+        prefix = "Bubble: ";
+        break;
+    case '2':
+        BubbleSort1(array, len);
+
+        prefix = "Bubble1: ";
+        break;
+    case '3':
+        BubbleSort2(array, len);
+
+        prefix = "Bubble2: ";
+        break;
+    case '4':
+        SelectSort(array, len);
+        
+        prefix = "Select: ";
+        break;
+    case '5':
+        InsertSort(array, len);
+
+        prefix = "Insert: ";
+        break;
+    case '6':
+        InsertSort1(array, len);
+
+        prefix = "Insert1: ";
+        break;
+    case '7':
+        ShellSort(array, len);	
+
+        prefix = "Shell: ";
+        break;
+    case '8':
+        MergeSort(array, len);
+
+        prefix = "Merge: ";
+        break;
+    case '9':
+        QuickSort(array, len);
+
+        prefix = "Quick: ";
+        break;
+    case '0':
+        MaxHeapSort(array, len);
+
+        prefix = "Heap: ";
+        break;
+    default:
+
+end:
+        cout << "idx(" << c << ") invalid or out of range." << endl;
+        return -1;
+    }
+
+    showArray(array, len, prefix);
 
 	return 0;
 }
+
