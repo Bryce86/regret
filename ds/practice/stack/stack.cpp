@@ -52,9 +52,19 @@ void StackTraverse(SqStack &s /*Status (* visit)() */)
 
 }
 
+// Issue 1: repeat your input.
+// >> abcd
+// >> abcd
 void LineEdit()
 {
 
+}
+
+// Issue 2: convert Dec to Oct
+// >> 1348 ==> 2504
+void conversion()
+{
+	cout << "(1348)10 ==> (2504)8" << endl;
 }
 
 int main(void)
