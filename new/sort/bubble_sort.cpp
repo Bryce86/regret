@@ -101,7 +101,7 @@ void bubblePass(std::vector<int>& arr, int j , int n)
 
 // 递归函数2：负责控制整体排序的轮数
 // 作用相当于外层 for (int i = 0; i < n - 1; ++i)
-void bubbleRecursive(std::vector<int>& arr, int n)
+void bubbleSortRecursive(std::vector<int>& arr, int n)
 {
     // 边界条件：如果只需要排序1个或0个元素，直接返回
     if (n <= 1) return;
@@ -110,13 +110,13 @@ void bubbleRecursive(std::vector<int>& arr, int n)
     bubblePass(arr, 0, n);
 
     // 递归处理剩下的前 n-1 个元素
-    bubbleRecursive(arr, n-1);
+    bubbleSortRecursive(arr, n-1);
 
 }
 
 // 封装调用接口
-void bubbleSortRecursive(std::vector<int>& arr) {
-    bubbleRecursive(arr, arr.size());
+void bubbleSort(std::vector<int>& arr) {
+    bubbleSortRecursive(arr, arr.size());
 }
 
 int main()
@@ -146,7 +146,7 @@ int main()
     std::cout << "\n";
 
     copy = arr;
-    bubbleSortRecursive(copy);
+    bubbleSort(copy);
     std::cout << "递归排序：";
     for (auto x : copy) std::cout << x << " ";
     std::cout << "\n";
