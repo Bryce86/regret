@@ -296,7 +296,7 @@ ListNode* removeKthFromEnd(ListNode* head, int k)
 
     ListNode* del = slow->next;
     slow->next = del->next;
-    free(del);
+    delete del;
 
     return dummy.next;
 }
