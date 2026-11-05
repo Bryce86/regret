@@ -6,7 +6,7 @@ using namespace std;
 
 /*
 LeetCode 138. 随机链表的复制 / Copy List with Random Pointer。
-剑指 Offer 面试题 26
+剑指 Offer 面试题 26 复杂链表的复制
 */
 
 
