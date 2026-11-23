@@ -4,6 +4,13 @@
 #include <thread>
 #include <iostream>
 
+//$ g++ -dM -E -x c++ /dev/null | grep __cplusplus
+//#define __cplusplus 201703L
+
+#if __cplusplus >= 201703L
+#include <optional>
+#endif
+
 template<typename T>
 class BlockingQueue {
 public:
@@ -24,8 +31,24 @@ public:
         not_empty_.notify_one();
     }
 
-    // Use C++14
-#if __cplusplus == 201402L
+#if __cplusplus >= 201703L
+
+    std::optional<T> pop() {
+        std::unique_lock<std::mutex> lock(mtx_);
+        not_empty_.wait(lock, [this] {
+            return !queue_.empty() || stopped_;
+        });
+
+        if (queue_.empty()) return std::nullopt;
+
+        T item = std::move(queue_.front());
+        queue_.pop();
+        not_full_.notify_one();
+        return item;
+    }
+#else
+
+    //#if __cplusplus == 201402L
 
     // 消费者取出任务，队列为空则阻塞
     // C++14 没有 std::optional，
@@ -44,22 +67,6 @@ public:
         return true;
     }
 
-#else
-    // Use C++20
-
-    std::optinal<T> pop() {
-        std::unique_lock<std::mutex> lock(mtx_);
-        not_empty_.wait(lock, [this] {
-            return !queue_.empty() || stopped_;
-        });
-
-        if (queue_.empty()) return std::nullopt;
-
-        T item = std::move(queue_.front());
-        queue_.pop();
-        not_full_.nofity_one();
-        return item;
-    }
 
 #endif
 
@@ -84,8 +91,6 @@ private:
 
 int main()
 {
-#if __cplusplus == 201402L
-
     BlockingQueue<int> q(5);
 
     std::thread producer([&q] {
@@ -97,34 +102,20 @@ int main()
     });
 
     std::thread consumer([&q] {
+#if __cplusplus >= 201703L
+        while (auto item = q.pop()) {
+            std::cout << "pop: " << *item << "\n";
+        }
+#else
         int item = 0;
         while (q.pop(item)) {
             std::cout << "pop: " << item << "\n";
         }
+#endif
     });
 
     producer.join();
     consumer.join();
-
-#else
-
-    BlockingQueue<int> q{5};
-
-    std::jthread producer([&q] {
-        for (int i = 0; i < 10; i++) {
-            q.push(i);
-            std::cout << "push: " << i << "\n";
-        }
-        q.stop();
-    });
-
-    std::jthread consumer([&q] {
-        while (auto item = q.pop()) {
-            std::cout << "pop: " << *item << "\n";
-        }
-    });
-
-#endif
 
     return 0;
 }
